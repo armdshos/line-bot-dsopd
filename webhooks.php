@@ -19,11 +19,12 @@ if (!is_null($events['events'])) {
 			//$text = $event['source']['userId'].'--user_id';
 			$uid = $event['source']['userId'];
 			// encry
+			$ciphering = "AES-128-CTR"; 
 			$iv_length = openssl_cipher_iv_length($ciphering); 
 			$options = 0; 
 			$encryption_iv = '0114470123456789'; 
 			$encryption_key = "opddansai";
-			$encryption = openssl_encrypt($simple_string, $ciphering,$encryption_key, $options, $encryption_iv); 
+			$encryption = openssl_encrypt($uid, $ciphering,$encryption_key, $options, $encryption_iv); 
 			
 			$text = 'เข้าระบบนัดออนไลน์ได้ที่ '.
 				'http://dsopd.youant.net/index.php?uid='.$encryption;
