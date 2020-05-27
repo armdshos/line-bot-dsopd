@@ -17,8 +17,16 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
 			//$text = $event['source']['userId'].'--user_id';
+			$uid = $event['source']['userId'];
+			// encry
+			$iv_length = openssl_cipher_iv_length($ciphering); 
+			$options = 0; 
+			$encryption_iv = '0114470123456789'; 
+			$encryption_key = "opddansai";
+			$encryption = openssl_encrypt($simple_string, $ciphering,$encryption_key, $options, $encryption_iv); 
+			
 			$text = 'เข้าระบบนัดออนไลน์ได้ที่ '.
-				'http://dsopd.youant.net/index.php?uid='.$event['source']['userId'];
+				'http://dsopd.youant.net/index.php?uid='.$encryption;
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
